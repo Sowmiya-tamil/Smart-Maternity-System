@@ -1,0 +1,7 @@
+patient_id,risk_level,data_quality,systolic_bp,diastolic_bp,heart_rate,temperature,spo2,headache,blurred_vision,bleeding,abdominal_pain,swelling,reduced_fetal_movement,trend_status,recommended_action,internet_status,communication_status
+DEMO001,LOW,Good,120,78,75,36.6,98,Yes,Yes,No,No,No,No,Stable,Continue Monitoring,Online,Pending
+DEMO002,HIGH,Good,158,102,88,37.0,97,No,No,No,No,No,No,Increasing,Clinician Review,Online,Failed
+DEMO003,HIGH,Good,155,98,90,37.1,96,Yes,Yes,No,No,Yes,No,Increasing,Immediate Clinician Review,Online,Completed
+DEMO004,UNCERTAIN,Incomplete,,95,82,36.8,97,No,No,No,No,No,No,Not Enough Data,Repeat Measurement / Clinician Review,Offline,Failed
+DEMO005,LOW,Good,118,76,72,36.5,99,No,No,No,No,No,No,Stable,Continue Monitoring,Online,Not Required
+DEMO006,HIGH,Good,152,98,86,37.0,97,Yes,Yes,No,No,No,No,Increasing,Clinician Review,Offline,Pending

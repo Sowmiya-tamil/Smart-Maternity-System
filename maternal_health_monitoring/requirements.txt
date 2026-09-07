@@ -1,0 +1,13 @@
+# requirements.txt
+# Remote Maternal Health Monitoring and Escalation System
+#
+# Install all dependencies with:
+#   pip install -r requirements.txt
+#
+# Packages actually used (Phases 1-8):
+streamlit
+pandas
+numpy
+
+# Phase 9 (pending — not yet implemented):
+# scikit-learn

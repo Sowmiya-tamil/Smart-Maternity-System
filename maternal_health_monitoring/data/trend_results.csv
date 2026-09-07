@@ -1,0 +1,101 @@
+patient_id,total_observations,valid_systolic_readings,previous_systolic_bp,latest_systolic_bp,systolic_bp_change,trend_status,overall_trend,trend_reason
+P001,15,15,116.0,119.0,3.0,Stable,Stable/Variable,Latest BP (119) is close to the previous valid reading (116). Recent readings are relatively stable.
+P002,5,5,115.0,119.0,4.0,Stable,Stable/Variable,Latest BP (119) is close to the previous valid reading (115). Recent readings are relatively stable.
+P003,14,14,120.0,125.0,5.0,Stable,Stable/Variable,Latest BP (125) is close to the previous valid reading (120). Recent readings are relatively stable.
+P004,11,11,118.0,118.0,0.0,Stable,Stable/Variable,Latest BP (118) is close to the previous valid reading (118). Recent readings are relatively stable.
+P005,14,14,150.0,160.0,10.0,Increasing,Consistently Increasing,Latest BP (160) is higher than the previous valid reading (150). Increasing BP trend observed.
+P006,8,7,120.0,120.0,0.0,Stable,Stable/Variable,Latest BP (120) is close to the previous valid reading (120). Recent readings are relatively stable.
+P007,6,6,142.0,151.0,9.0,Increasing,Consistently Increasing,Latest BP (151) is higher than the previous valid reading (142). Increasing BP trend observed.
+P008,10,10,120.0,113.0,-7.0,Decreasing,Stable/Variable,Latest BP (113) is lower than the previous valid reading (120). Decreasing BP trend observed.
+P009,7,7,124.0,127.0,3.0,Stable,Stable/Variable,Latest BP (127) is close to the previous valid reading (124). Recent readings are relatively stable.
+P010,15,14,150.0,159.0,9.0,Increasing,Consistently Increasing,Latest BP (159) is higher than the previous valid reading (150). Increasing BP trend observed.
+P011,10,10,120.0,110.0,-10.0,Decreasing,Stable/Variable,Latest BP (110) is lower than the previous valid reading (120). Decreasing BP trend observed.
+P012,13,12,182.0,129.0,-53.0,Decreasing,Stable/Variable,Latest BP (129) is lower than the previous valid reading (182). Decreasing BP trend observed.
+P013,5,3,119.0,114.0,-5.0,Stable,Stable/Variable,Latest BP (114) is close to the previous valid reading (119). Recent readings are relatively stable.
+P014,11,10,148.0,148.0,0.0,Stable,Stable/Variable,Latest BP (148) is close to the previous valid reading (148). Recent readings are relatively stable.
+P015,6,5,134.0,131.0,-3.0,Stable,Stable/Variable,Latest BP (131) is close to the previous valid reading (134). Recent readings are relatively stable.
+P016,9,9,114.0,113.0,-1.0,Stable,Stable/Variable,Latest BP (113) is close to the previous valid reading (114). Recent readings are relatively stable.
+P017,13,13,113.0,119.0,6.0,Increasing,Stable/Variable,Latest BP (119) is higher than the previous valid reading (113). Increasing BP trend observed.
+P018,14,14,125.0,120.0,-5.0,Stable,Stable/Variable,Latest BP (120) is close to the previous valid reading (125). Recent readings are relatively stable.
+P019,6,6,111.0,112.0,1.0,Stable,Consistently Increasing,Latest BP (112) is close to the previous valid reading (111). Recent readings are relatively stable.
+P020,7,6,134.0,138.0,4.0,Stable,Consistently Increasing,Latest BP (138) is close to the previous valid reading (134). Recent readings are relatively stable.
+P021,8,7,143.0,153.0,10.0,Increasing,Stable/Variable,Latest BP (153) is higher than the previous valid reading (143). Increasing BP trend observed.
+P022,12,10,110.0,116.0,6.0,Increasing,Stable/Variable,Latest BP (116) is higher than the previous valid reading (110). Increasing BP trend observed.
+P023,6,6,118.0,112.0,-6.0,Decreasing,Consistently Increasing,Latest BP (112) is lower than the previous valid reading (118). Decreasing BP trend observed.
+P024,10,7,120.0,130.0,10.0,Increasing,Stable/Variable,Latest BP (130) is higher than the previous valid reading (120). Increasing BP trend observed.
+P025,14,14,148.0,152.0,4.0,Stable,Consistently Increasing,Latest BP (152) is close to the previous valid reading (148). Recent readings are relatively stable.
+P026,5,5,117.0,117.0,0.0,Stable,Stable/Variable,Latest BP (117) is close to the previous valid reading (117). Recent readings are relatively stable.
+P027,11,10,126.0,120.0,-6.0,Decreasing,Consistently Decreasing,Latest BP (120) is lower than the previous valid reading (126). Decreasing BP trend observed.
+P028,9,8,143.0,143.0,0.0,Stable,Stable/Variable,Latest BP (143) is close to the previous valid reading (143). Recent readings are relatively stable.
+P029,5,5,116.0,120.0,4.0,Stable,Stable/Variable,Latest BP (120) is close to the previous valid reading (116). Recent readings are relatively stable.
+P030,12,12,142.0,146.0,4.0,Stable,Consistently Increasing,Latest BP (146) is close to the previous valid reading (142). Recent readings are relatively stable.
+P031,13,13,116.0,112.0,-4.0,Stable,Stable/Variable,Latest BP (112) is close to the previous valid reading (116). Recent readings are relatively stable.
+P032,10,8,118.0,119.0,1.0,Stable,Stable/Variable,Latest BP (119) is close to the previous valid reading (118). Recent readings are relatively stable.
+P033,7,6,122.0,124.0,2.0,Stable,Consistently Increasing,Latest BP (124) is close to the previous valid reading (122). Recent readings are relatively stable.
+P034,14,13,116.0,115.0,-1.0,Stable,Stable/Variable,Latest BP (115) is close to the previous valid reading (116). Recent readings are relatively stable.
+P035,15,15,156.0,157.0,1.0,Stable,Consistently Increasing,Latest BP (157) is close to the previous valid reading (156). Recent readings are relatively stable.
+P036,14,14,126.0,121.0,-5.0,Stable,Stable/Variable,Latest BP (121) is close to the previous valid reading (126). Recent readings are relatively stable.
+P037,13,12,117.0,116.0,-1.0,Stable,Stable/Variable,Latest BP (116) is close to the previous valid reading (117). Recent readings are relatively stable.
+P038,6,5,118.0,151.0,33.0,Increasing,Stable/Variable,Latest BP (151) is higher than the previous valid reading (118). Increasing BP trend observed.
+P039,14,13,120.0,122.0,2.0,Stable,Stable/Variable,Latest BP (122) is close to the previous valid reading (120). Recent readings are relatively stable.
+P040,9,9,137.0,138.0,1.0,Stable,Consistently Increasing,Latest BP (138) is close to the previous valid reading (137). Recent readings are relatively stable.
+P041,13,13,112.0,120.0,8.0,Increasing,Stable/Variable,Latest BP (120) is higher than the previous valid reading (112). Increasing BP trend observed.
+P042,7,7,145.0,146.0,1.0,Stable,Stable/Variable,Latest BP (146) is close to the previous valid reading (145). Recent readings are relatively stable.
+P043,8,8,117.0,112.0,-5.0,Stable,Stable/Variable,Latest BP (112) is close to the previous valid reading (117). Recent readings are relatively stable.
+P044,7,7,115.0,120.0,5.0,Stable,Consistently Increasing,Latest BP (120) is close to the previous valid reading (115). Recent readings are relatively stable.
+P045,10,10,142.0,141.0,-1.0,Stable,Consistently Increasing,Latest BP (141) is close to the previous valid reading (142). Recent readings are relatively stable.
+P046,12,11,111.0,115.0,4.0,Stable,Stable/Variable,Latest BP (115) is close to the previous valid reading (111). Recent readings are relatively stable.
+P047,9,9,117.0,113.0,-4.0,Stable,Stable/Variable,Latest BP (113) is close to the previous valid reading (117). Recent readings are relatively stable.
+P048,5,5,127.0,120.0,-7.0,Decreasing,Consistently Decreasing,Latest BP (120) is lower than the previous valid reading (127). Decreasing BP trend observed.
+P049,5,5,142.0,149.0,7.0,Increasing,Stable/Variable,Latest BP (149) is higher than the previous valid reading (142). Increasing BP trend observed.
+P050,10,10,146.0,140.0,-6.0,Decreasing,Consistently Increasing,Latest BP (140) is lower than the previous valid reading (146). Decreasing BP trend observed.
+P051,11,11,126.0,124.0,-2.0,Stable,Consistently Decreasing,Latest BP (124) is close to the previous valid reading (126). Recent readings are relatively stable.
+P052,6,6,113.0,115.0,2.0,Stable,Consistently Increasing,Latest BP (115) is close to the previous valid reading (113). Recent readings are relatively stable.
+P053,9,8,116.0,111.0,-5.0,Stable,Stable/Variable,Latest BP (111) is close to the previous valid reading (116). Recent readings are relatively stable.
+P054,7,7,128.0,124.0,-4.0,Stable,Stable/Variable,Latest BP (124) is close to the previous valid reading (128). Recent readings are relatively stable.
+P055,14,13,151.0,156.0,5.0,Stable,Consistently Increasing,Latest BP (156) is close to the previous valid reading (151). Recent readings are relatively stable.
+P056,12,12,148.0,145.0,-3.0,Stable,Stable/Variable,Latest BP (145) is close to the previous valid reading (148). Recent readings are relatively stable.
+P057,15,15,122.0,130.0,8.0,Increasing,Stable/Variable,Latest BP (130) is higher than the previous valid reading (122). Increasing BP trend observed.
+P058,12,11,114.0,118.0,4.0,Stable,Stable/Variable,Latest BP (118) is close to the previous valid reading (114). Recent readings are relatively stable.
+P059,5,5,113.0,117.0,4.0,Stable,Stable/Variable,Latest BP (117) is close to the previous valid reading (113). Recent readings are relatively stable.
+P060,13,11,147.0,144.0,-3.0,Stable,Consistently Increasing,Latest BP (144) is close to the previous valid reading (147). Recent readings are relatively stable.
+P061,12,12,117.0,114.0,-3.0,Stable,Stable/Variable,Latest BP (114) is close to the previous valid reading (117). Recent readings are relatively stable.
+P062,15,15,114.0,116.0,2.0,Stable,Stable/Variable,Latest BP (116) is close to the previous valid reading (114). Recent readings are relatively stable.
+P063,6,5,146.0,148.0,2.0,Stable,Consistently Increasing,Latest BP (148) is close to the previous valid reading (146). Recent readings are relatively stable.
+P064,8,7,110.0,120.0,10.0,Increasing,Stable/Variable,Latest BP (120) is higher than the previous valid reading (110). Increasing BP trend observed.
+P065,8,6,137.0,134.0,-3.0,Stable,Consistently Increasing,Latest BP (134) is close to the previous valid reading (137). Recent readings are relatively stable.
+P066,5,5,125.0,127.0,2.0,Stable,Consistently Increasing,Latest BP (127) is close to the previous valid reading (125). Recent readings are relatively stable.
+P067,13,11,119.0,116.0,-3.0,Stable,Consistently Decreasing,Latest BP (116) is close to the previous valid reading (119). Recent readings are relatively stable.
+P068,7,6,120.0,114.0,-6.0,Decreasing,Stable/Variable,Latest BP (114) is lower than the previous valid reading (120). Decreasing BP trend observed.
+P069,14,12,124.0,128.0,4.0,Stable,Stable/Variable,Latest BP (128) is close to the previous valid reading (124). Recent readings are relatively stable.
+P070,10,10,139.0,141.0,2.0,Stable,Consistently Increasing,Latest BP (141) is close to the previous valid reading (139). Recent readings are relatively stable.
+P071,5,5,115.0,110.0,-5.0,Stable,Stable/Variable,Latest BP (110) is close to the previous valid reading (115). Recent readings are relatively stable.
+P072,5,4,130.0,124.0,-6.0,Decreasing,Consistently Decreasing,Latest BP (124) is lower than the previous valid reading (130). Decreasing BP trend observed.
+P073,7,7,118.0,119.0,1.0,Stable,Stable/Variable,Latest BP (119) is close to the previous valid reading (118). Recent readings are relatively stable.
+P074,12,12,112.0,119.0,7.0,Increasing,Stable/Variable,Latest BP (119) is higher than the previous valid reading (112). Increasing BP trend observed.
+P075,14,14,151.0,161.0,10.0,Increasing,Consistently Increasing,Latest BP (161) is higher than the previous valid reading (151). Increasing BP trend observed.
+P076,9,9,118.0,119.0,1.0,Stable,Stable/Variable,Latest BP (119) is close to the previous valid reading (118). Recent readings are relatively stable.
+P077,10,10,148.0,149.0,1.0,Stable,Stable/Variable,Latest BP (149) is close to the previous valid reading (148). Recent readings are relatively stable.
+P078,15,13,124.0,125.0,1.0,Stable,Stable/Variable,Latest BP (125) is close to the previous valid reading (124). Recent readings are relatively stable.
+P079,14,13,113.0,111.0,-2.0,Stable,Stable/Variable,Latest BP (111) is close to the previous valid reading (113). Recent readings are relatively stable.
+P080,12,12,149.0,153.0,4.0,Stable,Consistently Increasing,Latest BP (153) is close to the previous valid reading (149). Recent readings are relatively stable.
+P081,5,3,122.0,127.0,5.0,Stable,Stable/Variable,Latest BP (127) is close to the previous valid reading (122). Recent readings are relatively stable.
+P082,11,11,115.0,117.0,2.0,Stable,Stable/Variable,Latest BP (117) is close to the previous valid reading (115). Recent readings are relatively stable.
+P083,9,9,111.0,114.0,3.0,Stable,Stable/Variable,Latest BP (114) is close to the previous valid reading (111). Recent readings are relatively stable.
+P084,13,12,151.0,151.0,0.0,Stable,Stable/Variable,Latest BP (151) is close to the previous valid reading (151). Recent readings are relatively stable.
+P085,6,6,130.0,134.0,4.0,Stable,Consistently Increasing,Latest BP (134) is close to the previous valid reading (130). Recent readings are relatively stable.
+P086,7,7,111.0,113.0,2.0,Stable,Stable/Variable,Latest BP (113) is close to the previous valid reading (111). Recent readings are relatively stable.
+P087,13,8,124.0,129.0,5.0,Stable,Stable/Variable,Latest BP (129) is close to the previous valid reading (124). Recent readings are relatively stable.
+P088,9,9,117.0,117.0,0.0,Stable,Consistently Increasing,Latest BP (117) is close to the previous valid reading (117). Recent readings are relatively stable.
+P089,5,5,115.0,110.0,-5.0,Stable,Stable/Variable,Latest BP (110) is close to the previous valid reading (115). Recent readings are relatively stable.
+P090,10,10,136.0,136.0,0.0,Stable,Stable/Variable,Latest BP (136) is close to the previous valid reading (136). Recent readings are relatively stable.
+P091,15,15,149.0,145.0,-4.0,Stable,Stable/Variable,Latest BP (145) is close to the previous valid reading (149). Recent readings are relatively stable.
+P092,13,11,114.0,153.0,39.0,Increasing,Consistently Increasing,Latest BP (153) is higher than the previous valid reading (114). Increasing BP trend observed.
+P093,8,8,120.0,129.0,9.0,Increasing,Stable/Variable,Latest BP (129) is higher than the previous valid reading (120). Increasing BP trend observed.
+P094,13,12,115.0,120.0,5.0,Stable,Stable/Variable,Latest BP (120) is close to the previous valid reading (115). Recent readings are relatively stable.
+P095,9,9,136.0,147.0,11.0,Increasing,Stable/Variable,Latest BP (147) is higher than the previous valid reading (136). Increasing BP trend observed.
+P096,8,8,123.0,125.0,2.0,Stable,Stable/Variable,Latest BP (125) is close to the previous valid reading (123). Recent readings are relatively stable.
+P097,6,6,115.0,116.0,1.0,Stable,Consistently Increasing,Latest BP (116) is close to the previous valid reading (115). Recent readings are relatively stable.
+P098,9,8,142.0,148.0,6.0,Increasing,Stable/Variable,Latest BP (148) is higher than the previous valid reading (142). Increasing BP trend observed.
+P099,13,13,129.0,120.0,-9.0,Decreasing,Stable/Variable,Latest BP (120) is lower than the previous valid reading (129). Decreasing BP trend observed.
+P100,15,14,204.0,164.0,-40.0,Decreasing,Consistently Increasing,Latest BP (164) is lower than the previous valid reading (204). Decreasing BP trend observed.
