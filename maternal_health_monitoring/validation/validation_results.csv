@@ -1,0 +1,6 @@
+metric,display_name,average_score,positive_count,needs_work_count,is_strongest,is_weakest
+workflow_clarity_score,Workflow Clarity,4.12,7,1,False,True
+escalation_clarity_score,Escalation Clarity,4.38,8,0,False,False
+usability_score,Usability,4.38,8,0,False,False
+safety_fallback_score,Safety Fallback,4.75,8,0,True,False
+overall_score,Overall Score,4.38,8,0,False,False

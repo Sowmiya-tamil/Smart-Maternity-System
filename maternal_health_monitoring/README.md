@@ -1,270 +1,384 @@
-# Remote Maternal Health Monitoring and Escalation System
+# Remote Maternal Health Monitoring and Escalation System (Smart Maternity System)
 
-> **Educational Prototype — Simulated Data Only**
-> This project is NOT a medical diagnostic system and must NOT be used to make real clinical decisions.
+> **Academic Prototype Notice & Medical Disclaimer:**  
+> This software is an **educational research prototype** that uses **entirely synthetic, simulated, and anonymized maternal-health data**. It is **NOT** a certified medical diagnostic device or clinical decision support system, and it must **NOT** be used to make real-world clinical or diagnostic decisions. All clinical rules, thresholds, and simulated scenarios are designed solely for software engineering demonstration and academic review.
 
 ---
 
 ## 1. Project Title
 
-**Remote Maternal Health Monitoring and Escalation System**
+**Remote Maternal Health Monitoring and Escalation System**  
+*(Smart Maternity System)*
 
 ---
 
-## 2. Problem Statement
+## 2. Project Overview
 
-Pregnant women living in remote or rural areas often receive only periodic community health worker visits. It is difficult to track changes in health readings over time, spot danger signs early, or know when a case should be escalated to a clinic or hospital — especially when internet connectivity is unreliable and clinician capacity is limited.
+The **Remote Maternal Health Monitoring and Escalation System** is a modular, rule-based healthcare software prototype engineered to address maternal health tracking in low-resource and rural settings. 
 
-This project demonstrates a simulated software workflow that could help community health workers monitor maternal health, detect risk, and route cases through a structured escalation process.
+In many underserved areas, expectant mothers interact with community health workers (CHWs) on an intermittent basis. Routine visits generate periodic vital sign readings and symptom reports, but detecting subtle health deterioration, resolving discrepancies between sensor readings and reported symptoms, and triaging high-risk cases under constrained healthcare infrastructure remain challenging.
 
----
-
-## 3. Project Objective
-
-Build a beginner-friendly, rule-based prototype (no real patient data) that:
-
-- Generates and processes simulated maternal health observations
-- Detects baseline health risk from sensor readings and reported symptoms
-- Tracks blood pressure trends across multiple patient visits
-- Identifies conflicts between sensor readings and patient-reported symptoms
-- Routes cases through a priority-based escalation workflow
-- Handles offline scenarios using a store-and-forward simulation
-- Enforces a clinician capacity limit and queues excess high-priority cases
-- Presents the complete workflow through a multi-page Streamlit application
+This project implements a complete, transparent, and deterministic pipeline:
+1. **Simulated Maternal Health Data Generation** (sensor vitals + maternal symptom logs)
+2. **Data Cleaning and Validation** (range bounds, missing-data handling, data quality flags)
+3. **Rule-Based Baseline Risk Detection** (vital threshold classification)
+4. **Per-Patient Blood Pressure Trend Analysis** (longitudinal visit progression)
+5. **Sensor-Symptom Conflict Detection** (identifying discrepancies and masking)
+6. **Escalation Routing with Safe Fallback** (prioritized workflow allocation)
+7. **Offline Store-and-Forward & Clinician Capacity Management** (connectivity resilience and queue management)
+8. **Failure Mode Analysis** (rigorous edge-case and failure characterization)
+9. **Interactive Streamlit Web Dashboard** (real-time monitoring, triage queue, patient drilldown, and analytics)
 
 ---
 
-## 4. Current Project Status
+## 3. Problem Statement
 
-**Phases 1–8 are implemented and working.**
-
-| Phase | Title                                          | Status          |
-|-------|------------------------------------------------|-----------------|
-| 1     | Project Foundation                             | ✅ Complete     |
-| 2     | Simulated Dataset Generation                   | ✅ Complete     |
-| 3     | Data Cleaning and Validation                   | ✅ Complete     |
-| 4     | Baseline Risk Detection                        | ✅ Complete     |
-| 5     | Trend Analysis                                 | ✅ Complete     |
-| 6     | Sensor-Symptom Conflict Detection              | ✅ Complete     |
-| 7     | Escalation Workflow, Capacity & Safe Fallback  | ✅ Complete     |
-| 8     | Streamlit Application (5-page prototype)       | ✅ Complete     |
-| 9     | Simple Machine Learning Model                  | 🔜 Pending     |
-| 10    | Formal Experiment and Evaluation               | 🔜 Pending     |
-| 11    | Failure-Mode Analysis and Stress Testing       | 🔜 Pending     |
-| 12    | Final Documentation and Presentation           | 🔜 Pending     |
+Maternal mortality and preventable prenatal complications remain significant global public health challenges, particularly in remote and low-resource environments. Key operational challenges include:
+- **Intermittent Monitoring:** Vital signs are recorded irregularly during field visits rather than continuously in clinical environments.
+- **Sensor Noise and Missing Data:** Field sensors often drop readings, generate sensor artifacts, or run out of battery.
+- **Sensor-Symptom Discrepancies:** A patient may present with severe pre-eclampsia symptoms (e.g., severe headache, visual disturbance) while blood pressure sensors show borderline or deceptive normal ranges, or vice versa.
+- **Unreliable Network Infrastructure:** Rural clinics frequently face internet downtime, risking silent data loss during critical emergencies.
+- **Clinician Scarcity and Burnout:** Primary health centers face strict staffing limits and cannot absorb unbounded emergency escalations simultaneously without a structured triage queue.
 
 ---
 
-## 5. Key Features Implemented
+## 4. Objectives
 
-| Feature | Description |
-|---------|-------------|
-| **Simulated dataset** | ~1 000 observations across 100 anonymous patients (P001–P100), 5–15 visits each |
-| **Data cleaning** | Missing-value detection, sensor range validation, data quality labels (Good / Incomplete / Invalid) |
-| **Rule-based risk detection** | Five risk levels: LOW / MEDIUM / HIGH / CRITICAL / UNCERTAIN |
-| **Trend analysis** | Per-patient systolic BP trend: Increasing / Decreasing / Stable / Not Enough Data |
-| **Conflict detection** | Compares sensor risk with reported symptoms; produces NO CONFLICT / SENSOR-SYMPTOM CONFLICT / SENSOR-ONLY CONCERN / INSUFFICIENT DATA |
-| **Escalation workflow** | Five priority levels; five escalation pathways including SAFE_FALLBACK |
-| **Safe fallback** | Incomplete or invalid data is never classified as LOW risk |
-| **Store-and-forward** | Offline high-priority cases are flagged as STORED, not discarded |
-| **Clinician capacity** | First 10 HIGH/CRITICAL cases = WITHIN_CAPACITY; remainder queued |
-| **Streamlit app** | Dashboard, Patient Assessment, Escalation Queue, Conflict Demo, Data Quality pages |
-| **Demo conflict cases** | Six hand-crafted cases (DEMO001–DEMO006) illustrating every scenario |
-| **Privacy by design** | No real names, addresses, phone numbers, or real patient records at any point |
+The primary objectives of this project are:
+- **Rule-Based Determinism:** Implement explainable, transparent, and auditable rule-based triage logic without opaque black-box machine learning dependencies.
+- **Data Quality & Safe Fallback:** Prevent silent under-triage by ensuring incomplete, noisy, or invalid sensor records are never classified as "Low Risk" and are instead routed to a dedicated `SAFE_FALLBACK` protocol.
+- **Sensor-Symptom Harmony:** Reconcile physiological measurements with subjective patient symptoms, ensuring subjective danger signs take precedence over reassuring sensor values.
+- **Connectivity & Operational Resilience:** Model store-and-forward communication buffers for offline scenarios and manage clinician capacity limits (max 10 high-priority reviews per cycle) via a prioritized queue.
+- **Comprehensive Visualization:** Deliver an interactive, multi-view Streamlit dashboard for community health workers and reviewing clinicians.
 
 ---
 
-## 6. Technology Stack
+## 5. Key Features
 
-| Tool       | Purpose                             | Used? |
-|------------|-------------------------------------|-------|
-| Python 3   | Main programming language           | ✅    |
-| Streamlit  | Interactive web application         | ✅    |
-| Pandas     | Data loading, processing, CSV I/O   | ✅    |
-| NumPy      | Numerical operations                | ✅    |
-| Scikit-learn | Simple ML model (Phase 9)        | 🔜 Pending |
-
-> **No** TensorFlow, PyTorch, LSTM, databases, APIs, authentication, or external services are used.
+- **Synthetic Cohort Generation:** 994 observational records across 100 anonymous patients (P001–P100), with 5–15 sequential visits each.
+- **6 Hand-Crafted Edge Cases (DEMO001–DEMO006):** Demonstrating normal vitals, hypertensive crisis, sensor-symptom conflict, sensor-only concern, offline store-and-forward, and missing data fallback.
+- **5-Tier Priority Framework:** Categorizes records into `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`, and `UNTRUSTED`.
+- **Longitudinal Trend Tracking:** Evaluates multi-visit systolic blood pressure velocity (Increasing, Decreasing, Stable, Insufficient Data).
+- **Safety Precedence Rules:** Patient-reported danger signs (headache, blurred vision, bleeding) strictly override normal sensor readings.
+- **Store-and-Forward Buffer:** Offline high-risk records are persisted in local queues (`STORED`) rather than discarded.
+- **Clinician Workload Governor:** Enforces a capacity boundary of 10 concurrent reviews per cycle, queuing excess cases transparently.
+- **Failure Mode Matrix (Phase 10):** Documents 10 specific failure modes with measured mitigation outcomes (7 Handled, 3 Partially Handled).
+- **Interactive Multi-Page Dashboard:** Built in Streamlit featuring high-level KPI cards, risk/escalation charts, patient detail exploration, triage queue management, edge case demos, and data quality diagnostics.
 
 ---
 
-## 7. Project Structure
+## 6. System Workflow / Architecture
+
+The system executes a strictly sequential, transparent data and logic pipeline:
 
 ```
-maternal_health_monitoring/
-│
-├── app.py                    ← Streamlit application (5 pages)
-├── generate_data.py          ← Phase 2: simulated dataset generation
-├── clean_data.py             ← Phase 3: data cleaning and validation
-├── risk_detection.py         ← Phase 4: rule-based risk detection
-├── trend_analysis.py         ← Phase 5: per-patient BP trend analysis
-├── conflict_detection.py     ← Phase 6: sensor-symptom conflict detection
-├── escalation_workflow.py    ← Phase 7: escalation, capacity, safe fallback
-│
-├── requirements.txt          ← Python packages required
-├── README.md                 ← This file
-│
-├── data/
-│   ├── simulated_maternal_data.csv   ← Raw simulated data (~1 000 rows)
-│   ├── cleaned_maternal_data.csv     ← Cleaned and quality-labelled data
-│   ├── baseline_risk_results.csv     ← Risk levels from Phase 4
-│   ├── trend_results.csv             ← Per-patient trend from Phase 5
-│   ├── conflict_results.csv          ← Conflict labels from Phase 6
-│   ├── escalation_results.csv        ← Full escalation output from Phase 7
-│   └── demo_conflict_cases.csv       ← 6 hand-crafted demo cases
-│
-├── docs/
-│   ├── PROJECT_PLAN.md       ← Detailed phase-by-phase plan
-│   └── DATA_PRIVACY.md       ← Privacy-by-design policy
-│
-├── models/                   ← Reserved for Phase 9 ML model
-└── experiments/              ← Reserved for Phase 10 evaluation scripts
+┌─────────────────────────────────────────────────────────┐
+│ 1. Data Generation (generate_data.py)                   │
+│    994 simulated records across 100 synthetic patients  │
+└──────────────────────────┬──────────────────────────────┘
+                           ▼
+┌─────────────────────────────────────────────────────────┐
+│ 2. Data Cleaning & Validation (clean_data.py)           │
+│    Range checks & Quality tagging (Good/Incomplete/     │
+│    Invalid)                                             │
+└──────────────────────────┬──────────────────────────────┘
+                           ▼
+┌─────────────────────────────────────────────────────────┐
+│ 3. Baseline Risk Detection (risk_detection.py)          │
+│    Physiological thresholds (LOW, MEDIUM, HIGH,         │
+│    CRITICAL, UNCERTAIN)                                 │
+└───────────────┬───────────────────────────┬─────────────┘
+                │                           │
+                ▼                           ▼
+┌───────────────────────────────┐ ┌───────────────────────┐
+│ 4. BP Trend Analysis          │ │ 5. Conflict Detection │
+│    (trend_analysis.py)        │ │    (conflict_         │
+│    Multi-visit BP trajectory  │ │     detection.py)     │
+│    (Increasing/Decreasing/    │ │    Sensor vs. Symptom │
+│    Stable)                    │ │    Discrepancy Check  │
+└───────────────┬───────────────┘ └───────────┬───────────┘
+                │                             │
+                └───────────────┬─────────────┘
+                                ▼
+┌─────────────────────────────────────────────────────────┐
+│ 6. Escalation Workflow & Capacity (escalation_          │
+│    workflow.py)                                         │
+│    Prioritization, Safe Fallback, Offline Buffer,       │
+│    Capacity Governor                                    │
+└──────────────────────────┬──────────────────────────────┘
+                           ▼
+┌─────────────────────────────────────────────────────────┐
+│ 7. Failure Mode & Usability Analysis (Phase 10 & 11)    │
+│    Risk mitigation audit & Stakeholder evaluation       │
+└──────────────────────────┬──────────────────────────────┘
+                           ▼
+┌─────────────────────────────────────────────────────────┐
+│ 8. Interactive Streamlit Dashboard (app.py)             │
+│    Multi-view analytics, triage queue, and live engine  │
+└─────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 8. How to Install Requirements
+## 7. Technologies Used
 
+| Technology | Purpose | Implementation Status |
+|---|---|---|
+| **Python 3.10+** | Core programming language for entire pipeline | ✅ Implemented |
+| **Streamlit** | Interactive multi-page web application & UI | ✅ Implemented |
+| **Pandas** | Tabular data manipulation, aggregation, and CSV serialization | ✅ Implemented |
+| **NumPy** | Numerical data operations and vector utilities | ✅ Implemented |
+| **Scikit-learn** | Supervised learning & model comparison | 🔜 *Future Enhancement* |
+
+> **Architecture Note:** No external databases, third-party cloud APIs, or heavy deep-learning frameworks (TensorFlow, PyTorch) are used. The implementation is self-contained, offline-capable, and easily reproducible.
+
+---
+
+## 8. Dataset
+
+The project operates on synthetic datasets generated specifically to model community maternal health parameters without privacy risks:
+
+- **Primary Dataset (`data/cleaned_maternal_data.csv`):** 994 observational records for 100 synthetic patients (`P001`–`P100`), each with 5 to 15 sequential observation days.
+- **Demonstration Dataset (`data/demo_conflict_cases.csv`):** 6 curated edge cases (`DEMO001`–`DEMO006`) showcasing distinct operational boundary conditions.
+
+### Monitored Parameters:
+1. **Physiological Vitals (Sensors):**
+   - Systolic Blood Pressure (`systolic_bp` in mmHg)
+   - Diastolic Blood Pressure (`diastolic_bp` in mmHg)
+   - Heart Rate (`heart_rate` in bpm)
+   - Body Temperature (`body_temp` in °C)
+   - Blood Oxygen Saturation (`spo2` in %)
+2. **Subjective Reported Symptoms (Boolean flags):**
+   - Headache, Blurred Vision, Severe Fatigue, Swelling, Reduced Fetal Movement, Vaginal Bleeding
+3. **Environment & Context:**
+   - Gestational Age (weeks), Observation Day, Internet Connectivity (`Online` / `Offline`), Communication Result
+
+---
+
+## 9. Implemented Phases
+
+| Phase | Module Name | Primary Script / Output | Status |
+|:---:|---|---|:---:|
+| **Phase 1** | Project Architecture & Governance | `docs/PROJECT_PLAN.md`, `docs/DATA_PRIVACY.md` | ✅ Complete |
+| **Phase 2** | Synthetic Dataset Generation | `generate_data.py` → `data/simulated_maternal_data.csv` | ✅ Complete |
+| **Phase 3** | Data Cleaning & Quality Labeling | `clean_data.py` → `data/cleaned_maternal_data.csv` | ✅ Complete |
+| **Phase 4** | Baseline Risk Engine | `risk_detection.py` → `data/baseline_risk_results.csv` | ✅ Complete |
+| **Phase 5** | Longitudinal Trend Analysis | `trend_analysis.py` → `data/trend_results.csv` | ✅ Complete |
+| **Phase 6** | Sensor-Symptom Conflict Detection | `conflict_detection.py` → `data/conflict_results.csv` | ✅ Complete |
+| **Phase 7** | Escalation, Capacity & Fallback | `escalation_workflow.py` → `data/escalation_results.csv` | ✅ Complete |
+| **Phase 8** | Streamlit Interactive Dashboard | `app.py` (Full multi-page user interface) | ✅ Complete |
+| **Phase 9** | Experiment & Evaluation Suite | `experiments/run_experiment.py` → `experiments/experiment_results.csv` | ✅ Complete |
+| **Phase 10** | Failure Mode Analysis | `experiments/failure_mode_analysis.py` → `docs/FAILURE_MODE_ANALYSIS.md` | ✅ Complete |
+| **Phase 11** | Stakeholder Usability Validation | `validation/run_validation.py` → `validation/USER_FEEDBACK_SUMMARY.md` | ✅ Complete |
+
+---
+
+## 10. Risk Detection
+
+The baseline risk engine (`risk_detection.py`) applies deterministic physiological rules to classify records:
+
+| Risk Category | Distribution (994 records) | Defining Criteria / Clinical Logic |
+|---|:---:|---|
+| **LOW** | 420 | All vitals within normal parameters; no concerning symptoms reported. |
+| **MEDIUM** | 131 | Mild physiological elevation (e.g., Systolic BP 130–139 mmHg or mild tachycardia). |
+| **HIGH** | 126 | Significant elevation (e.g., Systolic BP 140–159 mmHg, SpO2 90–94%, or moderate fever). |
+| **CRITICAL** | 141 | Severe hypertension (Systolic BP ≥ 160 mmHg), SpO2 < 90%, or acute danger signs (e.g., bleeding). |
+| **UNCERTAIN** | 176 | Sensor readings missing, corrupted, or physiologically implausible (triggers safe fallback). |
+
+---
+
+## 11. Trend Analysis
+
+The trend analysis engine (`trend_analysis.py`) groups visits by patient and analyzes systolic blood pressure velocity across consecutive observation days:
+- **Short-Term Trend (2-point velocity):**
+  - `Increasing`: Systolic BP increase > +5 mmHg between recent visits.
+  - `Decreasing`: Systolic BP decrease > -5 mmHg.
+  - `Stable`: Fluctuation within ±5 mmHg.
+- **Longitudinal Trend (3+ visits):** Evaluates persistent multi-visit upward drift indicating gradual onset of pre-eclampsia.
+- **Safety Role:** A patient presenting with "Medium" baseline risk whose blood pressure shows a continuous upward trajectory is flagged for closer follow-up.
+
+---
+
+## 12. Sensor-Symptom Conflict Detection
+
+The conflict detection module (`conflict_detection.py`) cross-references vital sign levels with maternal symptom reports:
+
+| Conflict Classification | Count | Operational Rule & Action |
+|---|:---:|---|
+| **NO CONFLICT** | 692 | Vitals and reported symptoms are fully concordant. |
+| **SENSOR-ONLY CONCERN** | 126 | Vitals are elevated (HIGH/CRITICAL), but the patient reports no symptoms (asymptomatic risk). Triage to `CLINICIAN_REVIEW`. |
+| **SENSOR-SYMPTOM CONFLICT** | 0 *(in bulk data, tested in DEMO001)* | Normal vitals accompanied by red-flag symptoms (headache, vision loss, bleeding). **Rule:** Symptoms strictly override sensors → Escalated to `CLINICIAN_REVIEW`. |
+| **INSUFFICIENT DATA** | 176 | Missing or corrupt measurements prevent conflict reconciliation. Escalated to `SAFE_FALLBACK`. |
+
+---
+
+## 13. Escalation Workflow
+
+The escalation engine (`escalation_workflow.py`) synthesizes baseline risk, trend velocity, and conflict tags into 5 actionable pathways:
+
+| Escalation Pathway | Priority | Count | Target Action |
+|---|---|:---:|---|
+| `CONTINUE_MONITORING` | **LOW** | 420 | Routine community health worker monitoring. |
+| `SCHEDULE_FOLLOWUP` | **MEDIUM** | 131 | Schedule non-urgent checkup within 48–72 hours. |
+| `CLINICIAN_REVIEW` | **HIGH** | 126 | Priority review by primary care physician/midwife. |
+| `URGENT_CLINICIAN_REVIEW` | **CRITICAL** | 141 | Immediate emergency clinical evaluation. |
+| `SAFE_FALLBACK` | **UNTRUSTED** | 176 | Immediate vitals re-measurement & supervisor check. |
+
+---
+
+## 14. Safe Fallback
+
+A cornerstone of the system's design is the **Safe Fallback Protocol**:
+- **Anti-Under-Triage Principle:** Incomplete, corrupted, or out-of-range sensor readings are **never** assumed to be normal or assigned `LOW` priority.
+- Any record flagged as `Incomplete` or `Invalid` in Phase 3 is automatically assigned `UNTRUSTED` priority and routed to `SAFE_FALLBACK`.
+- The system explicitly alerts health workers to repeat measurements and check device sensors rather than providing false reassurance.
+
+---
+
+## 15. Offline / Store-and-Forward
+
+To operate reliably in remote rural areas with intermittent connectivity:
+- The system checks connectivity status (`Online` vs. `Offline`) before attempting remote data dispatch.
+- Out of 348 cases requiring clinical escalation, **153 offline encounters** were detected.
+- **94 high-risk offline records** were successfully buffered into local persistence (`STORED`) for automated forwarding upon signal recovery.
+- Critical patient records are never silently dropped due to lack of network connectivity.
+
+---
+
+## 16. Clinician Capacity Handling
+
+Rural medical staff have bounded review capacity. To prevent unmanaged inbox flooding and clinician fatigue:
+- The system enforces a configurable **Capacity Limit of 10 HIGH / CRITICAL reviews per review cycle**.
+- **Execution in Current Dataset:**
+  - **10 cases** allocated to `WITHIN_CAPACITY` for immediate review.
+  - **257 cases** assigned to `QUEUED` status, strictly preserving priority rank for the subsequent review window.
+- The triage queue interface makes backlogs fully visible to supervisory staff.
+
+---
+
+## 17. Failure Mode Analysis (Phase 10 Summary)
+
+Phase 10 audited the system against 10 distinct failure modes (`docs/FAILURE_MODE_ANALYSIS.md`):
+
+| ID | Failure Mode Scenario | System Handling & Mitigation | Status |
+|:---:|---|---|:---:|
+| **FM01** | Missing sensor readings (176 records) | Flagged `Incomplete`, routed to `SAFE_FALLBACK` | ✅ Handled |
+| **FM02** | Invalid/noisy sensor values (25 records) | Flagged `Invalid`, repeat measurement required | ✅ Handled |
+| **FM03** | High sensor risk with no symptoms (126 records) | Categorized `SENSOR-ONLY CONCERN` → Clinician review | ✅ Handled |
+| **FM04** | Normal sensors with red-flag symptoms | Symptoms override sensors (demonstrated in `DEMO001`) | ✅ Handled |
+| **FM05** | High sensors + concerning symptoms (141 records) | Immediate `CRITICAL` priority & urgent escalation | ✅ Handled |
+| **FM06** | Insufficient data for decision (176 records) | Explicit `UNTRUSTED` label, no silent low-risk classification | ✅ Handled |
+| **FM07** | Network connectivity offline (153 records) | Store-and-forward local buffer (`STORED`) | ⚠️ Partially Handled *(Simulated buffer)* |
+| **FM08** | Communication transmission failure (81 records) | Error logged, case retained in queue | ⚠️ Partially Handled *(Manual retry)* |
+| **FM09** | Clinician capacity exceeded (257 queued) | Capacity governor queues excess cases | ⚠️ Partially Handled *(Fixed quota)* |
+| **FM10** | Untrusted recommendations (176 records) | Explicit `SAFE_FALLBACK` workflow | ✅ Handled |
+
+**Summary:** 7 Handled, 3 Partially Handled (connectivity, transmission retry, and dynamic capacity require live infrastructure).
+
+---
+
+## 18. Streamlit Dashboard
+
+The web application (`app.py`) is fully implemented and provides a multi-page interface for health workers and clinicians:
+
+1. **Dashboard Overview:** High-level KPI metric cards (Total Records, Critical, High, Conflicts, Safe Fallback), interactive risk & escalation distributions, and communication status panels.
+2. **Patient Assessment / Live Triage:** Interactive vital sign and symptom entry form that processes real-time inputs through the complete Phase 4–7 engine with instant visual risk badges.
+3. **Escalation Queue:** Filterable triage queue displaying all 994 records with priority sorting, search capabilities, and clinician capacity utilization indicators.
+4. **Conflict Demo Cases:** Interactive inspector for the 6 hand-crafted edge case demonstrations (`DEMO001`–`DEMO006`).
+5. **Data Quality & Insights:** Detailed missing-value diagnostics, sensor anomaly distributions, and longitudinal BP trend visualizations.
+
+---
+
+## 19. Privacy and Safety
+
+- **100% Synthetic Data:** All records are programmatically generated. No real patient identities, medical history, or protected health information (PHI) exist in this project.
+- **Anonymized Identifiers:** Patients are identified solely through synthetic codes (`P001`–`P100`, `DEMO001`–`DEMO006`).
+- **No External Data Exfiltration:** The system runs entirely on the local machine with zero third-party cloud data transmission.
+- Full details are available in [`docs/DATA_PRIVACY.md`](docs/DATA_PRIVACY.md).
+
+---
+
+## 20. Current Project Status
+
+### ✅ Completed & Fully Functional:
+- [x] End-to-end data pipeline (`generate_data.py` → `clean_data.py` → `risk_detection.py` → `trend_analysis.py` → `conflict_detection.py` → `escalation_workflow.py`)
+- [x] Deterministic 5-level risk & priority engine
+- [x] Longitudinal BP trend detection
+- [x] Sensor-symptom conflict resolution rules
+- [x] Safe fallback and offline store-and-forward modeling
+- [x] Clinician capacity queue management
+- [x] Multi-page interactive Streamlit dashboard (`app.py`)
+- [x] Formal experiment suite (`experiments/run_experiment.py`)
+- [x] Comprehensive failure mode analysis (`docs/FAILURE_MODE_ANALYSIS.md`)
+- [x] Usability & stakeholder feedback evaluation (`validation/USER_FEEDBACK_SUMMARY.md`)
+
+---
+
+## 21. Pending / Future Improvements
+
+The following architectural and clinical enhancements represent future work:
+
+- **Machine Learning Benchmarking:** Train simple interpretable models (e.g., Logistic Regression, Decision Trees) to benchmark predictive performance against the deterministic rule-based baseline.
+- **Hardware Telemetry Integration:** Direct Bluetooth Low Energy (BLE) ingestion from digital sphygmomanometers and pulse oximeters.
+- **Dynamic Multi-Clinician Load Balancing:** Adaptive queuing across regional health networks rather than a fixed single-clinic quota.
+- **Automated Communication Protocols:** Integration of cellular SMS and IVR alerting mechanisms for offline-to-online synchronization.
+- **Clinical Validation Studies:** Prospective clinical trials and ethical review (IRB) under certified medical supervision.
+
+---
+
+## 22. How to Run the Project
+
+### Prerequisites
+- Python 3.10 or higher installed on your system.
+
+### Step 1: Clone or Open the Repository
+```bash
+cd maternal_health_monitoring
+```
+
+### Step 2: Install Required Dependencies
 ```bash
 pip install -r requirements.txt
 ```
+*(Dependencies: `streamlit`, `pandas`, `numpy`)*
 
-Required packages: `streamlit`, `pandas`, `numpy`
-
----
-
-## 9. How to Run the Project
-
-### Option A — Run the full data pipeline first (required once)
-
+### Step 3: (Optional) Re-run the Data Pipeline
+> **Note:** All precomputed CSV results are included in `data/`. If you wish to regenerate and re-run all pipeline stages:
 ```bash
-cd maternal_health_monitoring
-
-python generate_data.py        # Phase 2 — creates simulated_maternal_data.csv
-python clean_data.py           # Phase 3 — creates cleaned_maternal_data.csv
-python risk_detection.py       # Phase 4 — creates baseline_risk_results.csv
-python trend_analysis.py       # Phase 5 — creates trend_results.csv
-python conflict_detection.py   # Phase 6 — creates conflict_results.csv
-python escalation_workflow.py  # Phase 7 — creates escalation_results.csv
+python generate_data.py        # Generates synthetic observations
+python clean_data.py           # Validates sensor ranges & data quality
+python risk_detection.py       # Computes baseline risk categories
+python trend_analysis.py       # Analyzes longitudinal BP trends
+python conflict_detection.py   # Reconciles sensor-symptom conflicts
+python escalation_workflow.py  # Executes escalation, capacity & fallback logic
+python experiments/run_experiment.py          # Runs operational metrics evaluation
+python experiments/failure_mode_analysis.py   # Executes failure mode verification
+python validation/run_validation.py           # Processes usability feedback survey
 ```
 
-### Option B — Launch the Streamlit application
-
+### Step 4: Launch the Streamlit Web Dashboard
 ```bash
-python -m streamlit run app.py
+streamlit run app.py
 ```
-
-Open your browser at: **http://localhost:8501**
-
-> The data CSV files are already included in the repository.
-> You only need to re-run the pipeline scripts if you want to regenerate the data.
+Open your web browser at: **`http://localhost:8501`**
 
 ---
 
-## 10. Data Pipeline
+## 23. Project Disclaimer
 
 ```
-generate_data.py
-    └─► data/simulated_maternal_data.csv
-            └─► clean_data.py
-                    └─► data/cleaned_maternal_data.csv
-                            └─► risk_detection.py
-                                    └─► data/baseline_risk_results.csv
-                                            ├─► trend_analysis.py
-                                            │       └─► data/trend_results.csv
-                                            └─► conflict_detection.py  (uses trend_results too)
-                                                    └─► data/conflict_results.csv
-                                                            └─► escalation_workflow.py
-                                                                    └─► data/escalation_results.csv
+========================================================================================
+                               ACADEMIC DISCLAIMER
+========================================================================================
+This software project is developed strictly for educational, academic, and research 
+demonstration purposes. 
+
+1. NOT A MEDICAL DEVICE: This software is NOT approved, certified, or intended for use 
+   as a medical diagnostic device, clinical decision support system, or treatment tool.
+2. SYNTHETIC DATA: All data, including patient identifiers, physiological readings, and 
+   clinical encounters, are 100% synthetically generated. Any resemblance to real persons 
+   or medical records is purely coincidental.
+3. CLINICAL CONSULTATION: Real-world maternal health concerns must always be evaluated 
+   by licensed healthcare professionals and medical doctors.
+========================================================================================
 ```
-
----
-
-## 11. Module Descriptions
-
-### Phase 2 — Simulated Dataset Generation (`generate_data.py`)
-Generates approximately 1 000 rows of completely fake patient observations across 100 anonymous patients (P001–P100). Each patient has 5–15 observation days. Fields include systolic/diastolic BP, heart rate, temperature, SpO2, six patient-reported symptoms, internet status, and communication status. No real patient data is used.
-
-### Phase 3 — Data Cleaning (`clean_data.py`)
-Validates each sensor reading against safe prototype ranges. Records are labelled **Good**, **Incomplete** (missing values), or **Invalid** (out-of-range). The cleaned dataset is saved without modifying the original raw file.
-
-### Phase 4 — Baseline Risk Detection (`risk_detection.py`)
-Applies simple if/elif rules to assign one of five risk levels:
-
-| Level | Meaning |
-|-------|---------|
-| LOW | All readings within prototype normal ranges |
-| MEDIUM | Moderately elevated readings |
-| HIGH | Clearly elevated readings requiring clinician review |
-| CRITICAL | Severely abnormal readings or high-priority symptoms |
-| UNCERTAIN | Data quality is too poor to assess reliably |
-
-### Phase 5 — Trend Analysis (`trend_analysis.py`)
-Groups observations by `patient_id`, sorts by `observation_day`, and computes:
-- **Recent trend** (last two readings): Increasing / Decreasing / Stable / Not Enough Data
-- **Overall trend** (3+ readings): Consistently Increasing / Consistently Decreasing / Stable/Variable
-
-The ±5 mmHg threshold used here is a **prototype demonstration value, not a medical threshold**.
-
-### Phase 6 — Sensor-Symptom Conflict Detection (`conflict_detection.py`)
-Compares the sensor-based risk level with patient-reported symptoms and assigns one of four conflict labels:
-
-| Status | Meaning |
-|--------|---------|
-| NO CONFLICT | Sensor and symptoms are consistent |
-| SENSOR-SYMPTOM CONFLICT | Sensors appear normal but concerning symptoms reported → Clinician Review |
-| SENSOR-ONLY CONCERN | Sensor risk is high but no matching symptoms reported |
-| INSUFFICIENT DATA | Data quality too poor to reconcile → Safe Fallback |
-
-**Core safety rule:** A low/normal sensor reading never overrides a concerning symptom report.
-
-### Phase 7 — Escalation Workflow (`escalation_workflow.py`)
-Assigns priority, escalation pathway, communication simulation, store-and-forward status, clinician capacity, and schedule status.
-
-**Safe fallback:** UNCERTAIN or incomplete data is always classified UNTRUSTED and routed to SAFE_FALLBACK. It is never labelled LOW.
-
-**Store-and-forward:** Offline cases requiring escalation are marked STORED (not discarded).
-
-**Clinician capacity:** The first 10 HIGH/CRITICAL cases per cycle are WITHIN_CAPACITY; the rest are QUEUED.
-
-### Phase 8 — Streamlit Application (`app.py`)
-Five-page interactive prototype:
-
-| Page | Description |
-|------|-------------|
-| Dashboard | Summary metrics and two distribution charts |
-| Patient Assessment | Live assessment form — runs the full Phase 4–7 workflow on new input |
-| Escalation Queue | Sortable, filterable queue of all 994 processed records |
-| Conflict Demo | Interactive browser for all six DEMO001–DEMO006 edge cases |
-| Data Quality | Missing value report and quality distribution |
-
----
-
-## 12. Privacy-by-Design Approach
-
-- All patient records are **entirely simulated** by `generate_data.py`
-- No names, phone numbers, addresses, Aadhaar numbers, hospital IDs, or real medical records are used at any point
-- Patients are identified only by anonymous IDs: P001–P100 and DEMO001–DEMO006
-- All data files are stored locally; no external database, server, or API is used
-- See [`docs/DATA_PRIVACY.md`](docs/DATA_PRIVACY.md) for the full privacy policy
-
----
-
-## 13. Pending Work
-
-The following items remain to be completed:
-
-- **Phase 9:** Train a simple supervised ML model (Decision Tree or Logistic Regression) on the simulated dataset and compare it with the rule-based approach
-- **Phase 10:** Formal experiment and evaluation (accuracy, precision, recall, confusion matrix)
-- **Phase 11:** Failure-mode analysis and stress testing (edge cases, extreme values, all-missing data)
-- **Phase 12:** Final documentation (`docs/FINAL_REPORT.md`, `docs/FAILURE_CASES.md`) and presentation
-
----
-
-## ⚠️ Important Disclaimer
-
-> This prototype is **not a medical diagnostic system** and must **not** be used to make real clinical decisions.
->
-> All data is entirely simulated. All thresholds and rules are for **software workflow demonstration only** and do not represent official medical guidelines.
->
-> If you are a patient or caregiver, please consult a qualified medical professional for any health concerns.
